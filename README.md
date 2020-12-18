@@ -54,6 +54,7 @@ This Repository stores implementation of several datastructures in several langu
     #### Binary Trees references:
       - [Wikipedia](https://en.wikipedia.org/wiki/Binary_tree)
       - [Binary Trees Explained with Illustrations](https://www.upgrad.com/blog/5-types-of-binary-tree/)
+      - [Binary Trees with go](https://www.youtube.com/watch?v=-oYitelECuQ)
       - [Stanford](http://cslibrary.stanford.edu/110/BinaryTrees.html)
       - [GeeksForGeeks](https://www.geeksforgeeks.org/binary-tree-data-structure/)
       - [BST Visualization](https://www.cs.usfca.edu/~galles/visualization/BST.html)
