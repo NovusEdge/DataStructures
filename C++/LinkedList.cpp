@@ -1,71 +1,120 @@
 #include "iostream"
 #include "vector"
 
-class Node;
-class LinkedList;
+template<class T> class Node;
+template<class T> class LinkedList;
 
+template<class T>
 class LinkedList{
+
     public:
-        Node* head;
+        Node<T>* head;
+        Node<T>* tail;
+        int      len;
 
-    LinkedList(Node* head) { this->head = head; }
-    ~LinkedList();
+    LinkedList(Node<T>* head) { this->head = head; }
+    ~LinkedList() {};
 
-    void Append(int);   
-    void Insert(int, int);
-    int Pop();
-    int Delete(int);
+    void Append(T);   
+    void Insert(T, int);
+    T    Pop();
+    T    Delete(int);
 
 };
 
+template<class T>
 class Node{
     public:
-        int data;
-        Node* next = NULL;
-    
-    Node(int data, Node* next);
-    void PrintNode();
+        T        data;
+        Node<T>* next = NULL;
+        
+    Node(T data, Node<T>* next)  {this->data = data; this->next = next; }
+    ~Node() {};
+
 };
 
-void LinkedList::Append(int elem){
+template<class T>
+void LinkedList<T>::Append(T elem){
     if (this->head->next == NULL){
-        this->head->next = new Node(elem, NULL);    
+        this->head->next = new Node<T>(elem, NULL);    
     }
 
-    Node* tempNode = this->head;
+    Node<T>* tempNode = this->head;
 
     while (tempNode->next != NULL) {
         tempNode = tempNode->next;
     }
 
-    tempNode->next = new Node(elem, NULL);
+    tempNode->next = new Node<T>(elem, NULL);
+    this->tail = tempNode->next;
+    this->len += 1;
 }
 
-LinkedList MakeList(std::vector<int> items){
-    Node* headNode = new Node(items[0], NULL);
-    LinkedList retList = LinkedList(headNode);
+template<class T>
+LinkedList<T> MakeList(std::vector<T> items){
+    Node<T>* headNode = new Node<T>(items[0], NULL);
+    LinkedList<T> retList = LinkedList<T>(headNode);
 
-    for(std::vector<int>::size_type i = 1; i != items.size(); i++) {
+    for(int i = 1; i != items.size(); i++) {
         retList.Append(items[i]);    
     }
 
     return retList;
 }
 
-int LinkedList::Pop(){
-    
-    return 0;
+template<class T>
+T LinkedList<T>::Pop(){
+    Node<T>* tempNode = this->head->next;
+    Node<T>* prevNode = this->head;
+
+    while ( tempNode->next != NULL ){
+        tempNode = tempNode->next;
+        prevNode = prevNode->next;
+    }
+
+    this->tail = prevNode;
+    this->tail->next = NULL;
+
+    T retData = tempNode->data;
+
+    tempNode->~Node();
+
+    this->len -= 1;
+
+    return retData;
 }
 
-int LinkedList::Delete(int index){
+template<class T>
+T LinkedList<T>::Delete(int index){
 
-    return 0;
+    if ( index >= this->len ){
+        return -1;
+    }
+
+    Node<T>* tempNode = this->head->next;
+    Node<T>* prevNode = this->head;
+    int i = 0;
+
+    while ( i < index ){
+        i++;
+        tempNode = tempNode->next;
+        prevNode = prevNode->next;
+    }
+
+    T retData = tempNode->data;
+    prevNode->next = tempNode->next;
+
+    tempNode->~Node();
+
+    return retData;
 }
 
-void Node::PrintNode(){
-
-}
 
 int main() {
+    Node<int> headNode = Node<int>(10, NULL);
+    LinkedList<int> ll = LinkedList<int>(&headNode);
+
+    printf("Head: %p\n", ll.head); 
+
     return 0;
 }

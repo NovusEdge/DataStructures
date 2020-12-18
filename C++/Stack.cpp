@@ -1,27 +1,29 @@
 #include "iostream" 
 #include "vector"
 
-class Stack{
+template <class T> class Stack{
     private:
-        std::vector<int> items;
+        std::vector<T> items;
     
     public:
-        Stack()  {}   // constructor
-        ~Stack() {}   // destructor
+        Stack()  { }   // constructor
+        ~Stack() { }   // destructor
 
-        void Push(int);
-        int  Pop();
-        int  Peek();
-        int  Size();
+        void Push(T);
+        T  Pop();
+        T  Peek();
+        long  Size();
         bool IsEmpty();
 };
 
-void Stack::Push( int elem ){
+template<class T>
+void Stack<T>::Push( T elem ){
     this->items.push_back( elem );
 }
 
-Stack MakeStack(std::vector<int> arr){
-    Stack retStack = Stack();
+template<class T>
+Stack<T> MakeStack(std::vector<T> arr){
+    Stack<T> retStack = Stack<T>();
 
     for(int i: arr){
         retStack.Push(i);
@@ -30,27 +32,31 @@ Stack MakeStack(std::vector<int> arr){
     return retStack;
 }
 
-int Stack::Pop(){
-    int lastelem = this->items.back();
+template<class T>
+T Stack<T>::Pop(){
+    T lastelem = this->items.back();
     this->items.pop_back();
 
     return lastelem;
 }
 
-int Stack::Peek(){
+template<class T>
+T Stack<T>::Peek(){
    return this->items.back();
 }
 
-int Stack::Size(){
-    return this->items.size();
+template<class T>
+long Stack<T>::Size(){
+    return long(this->items.size());
 }
 
-bool Stack::IsEmpty(){
-    return Size() == 0;
+template<class T>
+bool Stack<T>::IsEmpty(){
+    return this->items.size() == 0;
 }
 
 int main(){
-    Stack st = Stack();
+    Stack<int> st = Stack<int>();
 
     printf("%d\n", st.IsEmpty());
     st.~Stack();
@@ -58,14 +64,14 @@ int main(){
     int arr[] = { 10, 20, 30, 40, 50, 60 }; 
     std::vector<int> vect(arr, arr + 6); 
 
-    Stack s = MakeStack(vect);
+    Stack<int> s = MakeStack(vect);
 
     printf("Top: %d\n", s.Peek());
-    printf("Size: %d\n", s.Size());
+    printf("Size: %ld\n", s.Size());
 
     printf("Popped elem: %d\n", s.Pop());
 
-    printf("Size: %d\n", s.Size());
+    printf("Size: %ld\n", s.Size());
     printf("Top: %d\n", s.Peek());
 
     return 0;
