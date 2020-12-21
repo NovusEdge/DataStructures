@@ -21,6 +21,7 @@ void Stack<T>::Push( T elem ){
     this->items.push_back( elem );
 }
 
+
 template<class T>
 Stack<T> MakeStack(std::vector<T> arr){
     Stack<T> retStack = Stack<T>();
