@@ -5,7 +5,7 @@ template<class T> class DNode;
 template<class T> class DoublyLinkedList;
 
 template<class T>
-class DoublyLinkedList{    // ! DO NOT USE, HAVENT MANAGD MEMORY STUFFS YET
+class DoublyLinkedList{ 
 
     public:
         DNode<T>* head;

@@ -21,6 +21,13 @@ def BST(object):
     def __init__(self, root=Node()):
         self.root = root
 
+    def insert(self, node):
+        self._insert(node, self.root)
+
+
+    def _printTree(self):
+        pass
+
     def _insert(self, node, cur_node):
 
         if node.data < cur_node.data:
@@ -35,13 +42,13 @@ def BST(object):
             else:
                 self._insert(node, cur_node.right)
 
-    def insert(self, node):
-        self._insert(node, self.root)
-
-
-    def _printTree(self):
-        pass
-    
     def printTree(self):
         pass
 
+if __name__ == "__main__":
+    b = BST(Node(15))
+    b.insert(Node(10))
+    b.insert(Node(20))
+    print( b.root.data )
+    print( b.root.left.data )
+    print( b.root.right.data )
