@@ -26,7 +26,7 @@ def BST(object):
 
 
     def _printTree(self):
-        pass
+        self.printTree()
 
     def _insert(self, node, cur_node):
 
