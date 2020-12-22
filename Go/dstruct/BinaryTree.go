@@ -81,11 +81,14 @@ func (bt *BST) Search(data int) *Node {
 	return bt.Root
 }
 
+// ----------------------------------------------------------------------------------------------------------------
+
 //! needs work
 func (bbt *BBST) Search(data int) *BNode {
 	if bbt.Root == nil {
 		return bbt.Root
 	}
+
 	if data < bbt.Root.Data {
 		if bbt.Root.Left != nil {
 			searchString += "L"
@@ -102,10 +105,13 @@ func (bbt *BBST) Search(data int) *BNode {
 		searchString += "L"
 		return bbt.Root.Left.Search(data)
 	}
+
 	fmt.Printf("Path: %s\n", searchString)
 	searchString = ""
 	return bbt.Root
 }
+
+// ----------------------------------------------------------------------------------------------------------------
 
 //Min reports the node with smallest data-value in a binary tree
 func (bt *BST) Min() int {
@@ -158,6 +164,8 @@ func (bt *BST) Insert(node *Node) {
 	}
 }
 
+// ----------------------------------------------------------------------------------------------------------------
+
 //! needs work
 func (bbt *BBST) Insert(node *BNode) {
 	if bbt.Root == nil {
@@ -165,19 +173,19 @@ func (bbt *BBST) Insert(node *BNode) {
 	} else {
 		if node.Data < bbt.Root.Data {
 			if bbt.Root.Left != nil {
+				bbt.Root.Left.Insert(node)
 				if bbt.Root.Left.Root.Data > node.Data {
 					_swap(node, bbt.Root.Left.Root)
 				}
-				bbt.Root.Left.Insert(node)
 			} else {
 				bbt.Root.Left = &BBST{Root: node}
 			}
 		} else if node.Data > bbt.Root.Data {
 			if bbt.Root.Right != nil {
+				bbt.Root.Right.Insert(node)
 				if bbt.Root.Right.Root.Data < node.Data {
 					_swap(node, bbt.Root.Right.Root)
 				}
-				bbt.Root.Right.Insert(node)
 			} else {
 				bbt.Root.Right = &BBST{Root: node}
 			}
@@ -189,22 +197,55 @@ func _swap(node1 *BNode, node2 *BNode) {
 	node1.Data, node2.Data = node2.Data, node1.Data
 }
 
-//InOrder traverses the tree in-order, and reports its path in form of an array
-func (bt *BST) InOrder() {
-
-}
+// ----------------------------------------------------------------------------------------------------------------
 
 //PreOrder traverses the tree pre-order, and prints its path
 func (bt *BST) PreOrder() {
 
+	fmt.Printf("%p -> ", bt.Root.Data)
+
+	if bt.Root.Left != nil {
+		bt.Root.Left.PreOrder()
+	}
+	if bt.Root.Right != nil {
+		bt.Root.Right.PreOrder()
+	}
+
+}
+
+//InOrder traverses the tree in-order, and reports its path in form of an array
+func (bt *BST) InOrder() (res []Node) {
+	if bt.Root.Left != nil {
+		bt.Root.Left.InOrder()
+	}
+
+	fmt.Printf("%p -> ", bt.Root.Data)
+
+	if bt.Root.Right != nil {
+		bt.Root.Right.InOrder()
+	}
+
+	return
 }
 
 //PostOrder traverses the tree post-order, and prints its path
-func (bt *BST) PostOrder() {
+func (bt *BST) PostOrder() (res []Node) {
 
+	if bt.Root.Left != nil {
+		bt.Root.Left.PostOrder()
+	}
+	if bt.Root.Right != nil {
+		bt.Root.Right.PostOrder()
+	}
+
+	fmt.Printf("%p -> ", bt.Root.Data)
 }
 
 //PrintTree prints out the binary tree
 func (bt *BST) PrintTree() {
+
+}
+
+func (bt *BST) SortTree() {
 
 }

@@ -12,7 +12,6 @@ class Node{
 }
 
 
-
 template<class T>
 class BinaryTree{
 	public:
@@ -57,10 +56,19 @@ Node<T>* BinaryTree<T>::Search(T data){
 }
 
 template<class T>
-void AddNode(Node<T>* node, Node<T>* curNode ){
-
+void BinaryTree<T>::AddNode(Node<T>* node, Node<T>* curNode ){
+	if (node->data < curNode->data){
+		if (curNode->left == NULL){ curNode->left = node; }
+		else { AddNode( node, curNode->left ); }
+	}
+	else {
+		if (curNode->right == NULL){ curNode->right = node; }
+		else { AddNode( node, curNode->right ); }
+	}
 }
 
 
-
+int main(){ 
+	
+}
 
