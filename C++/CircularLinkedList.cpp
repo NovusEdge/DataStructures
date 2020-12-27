@@ -11,7 +11,5 @@ class CLinkedList{
 		~CLinkedList(){};
 		
 		long Len();
-		void Enqueue(T item);
-		T 	 Dequeue();
-	
+		void Append(T item);
 }

@@ -180,6 +180,16 @@ func (bbt *BBST) Insert(node *BNode) {
 	}
 }
 
+// -------------------------------------------------------------------------------------------------------------------------
+
+func (bt *BST) DeleteNode(node *Node) {
+	if bt.Root != nil {
+
+	}
+}
+
+// -------------------------------------------------------------------------------------------------------------------------
+
 //PreOrder traverses the tree pre-order, and prints its path
 func (bt *BST) PreOrder() {
 	bt._preOrder()
@@ -285,9 +295,5 @@ func (bbt *BBST) _postOrder() {
 
 //PrintTree prints out the binary tree
 func (bt *BST) PrintTree() {
-
-}
-
-func (bt *BST) SortTree() {
 
 }
