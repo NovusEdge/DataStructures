@@ -9,7 +9,7 @@ class Node{
 		T	  data;
 		Node* left  = NULL;
 		Node* right = NULL;
-}
+};
 
 
 template<class T>
@@ -24,7 +24,7 @@ class BinaryTree{
 		Node<T>* Search(T data);
 		Node<T>* Delete(T data);
 
-}
+};
 
 template<class T>
 Node<T>* BinaryTree<T>::Search(T data){
